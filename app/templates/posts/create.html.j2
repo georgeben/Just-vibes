@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1> {% block title %} New vibes {% endblock %} </h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <textarea name="content" rows="4" placeholder="What are your vibes today? Positive vibes only">
+    </textarea>
+    <button type="submit"> Post </button>
+  </form>
+{% endblock %}

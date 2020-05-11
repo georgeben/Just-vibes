@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %} Vibes {% endblock %}</h1>
+  {% if g.user %}
+    <a href="{{ url_for('posts.create') }}">
+      What's your vibe?
+    </a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for post in posts %}
+    <article>
+      <header>
+        <h1>{{ post['title'] }}</h1>
+        <p> {{post['username']}} {{post['created_at'].strftime('%d-%m-%y')}} </p>
+      </header>
+      <p> {{post['content']}} </p>
+      <p>Post: {{post['post_id']}}</p>
+      {% if g.user['id'] == post['user_id'] %}
+        <form action="{{ url_for('posts.delete_post', id=post['post_id']) }}" method="post">
+          <button>Delete</button>
+        </form>
+      {% endif %}
+    </article>
+  {% endfor %}
+{% endblock %}
